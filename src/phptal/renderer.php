@@ -13,16 +13,16 @@
 
 		function getRenderer() {
 			return function() {
-				if( $this->_layout ) {
-					if( file_exists( Application::getInstance()->getConfig( 'defaults/viewPath', 'application/view/' ) . $this->_layout . '.' . $this->getConfig( 'view/extension', 'html' ) ) && file_exists( $this->template ) ) {
-						$phptal = new \PHPTAL( Application::getInstance()->getConfig( 'defaults/viewPath', 'application/view/' ) . $this->_layout . '.' . $this->getConfig( 'view/extension', 'html' ) );
+				if( $this->getLayout() ) {
+					if( file_exists( $this->getConfig( 'defaults/viewPath', 'application/view/' ) . $this->getLayout() . '.' . $this->getConfig( 'view/extension', 'html' ) ) && file_exists( $this->template ) ) {
+						$phptal = new \PHPTAL( $this->getConfig( 'defaults/viewPath', 'application/view/' ) . $this->getLayout() . '.' . $this->getConfig( 'view/extension', 'html' ) );
 						$phptal->viewTemplate = $this->template;
 					}
 				} else if( file_exists( $this->template ) ) {
-					$phptal = new PHPTAL( $this->template );
+					$phptal = new \PHPTAL( $this->template );
 				}
 				if( $phptal ) {
-					$phptal->viewBag = $this->viewBag;
+					$phptal->viewBag = $this->getViewBag();
 					$phptal->model = $this->model;
 					$phptal->view = $this;
 				}
