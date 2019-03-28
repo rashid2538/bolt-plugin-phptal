@@ -22,6 +22,14 @@
 					$phptal = new \PHPTAL( $this->template );
 				}
 				if( $phptal ) {
+					$phptal->stripComments( $this->getConfig( 'phptal/stripComments', false ) );
+					$phptal->setOutputMode( \PHPTAL::HTML5 );
+					if( $this->getConfig( 'phptal/compress', false ) ) {
+						$phptal->setPrefilter( new \PHPTAL_PreFilter_Compress() );
+					}
+					if( $this->getConfig( 'phptal/normalize', false ) ) {
+						$phptal->setPrefilter( new \PHPTAL_PreFilter_Normalize() );
+					}
 					$phptal->viewBag = $this->getViewBag();
 					$phptal->model = $this->model;
 					$phptal->view = $this;
