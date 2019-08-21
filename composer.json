@@ -9,7 +9,7 @@
 		"rashid2538/bolt-framework": ">=v0.8.1"
     }, "autoload": {
 		"psr-4": {
-			"BoltPlugin\\PHPTAL\\":"src/phptal"
+			"BoltPlugin\\PHPTAL\\":"src/PHPTAL"
 		}
 	}, "authors": [
 		{
